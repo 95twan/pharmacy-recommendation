@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: project
+  profiles:
+    active: local
+    group:
+      local:
+        - common
+      prod:
+        - common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/pharmacy_recommendation
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
