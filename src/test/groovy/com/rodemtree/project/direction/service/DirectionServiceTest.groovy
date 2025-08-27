@@ -1,6 +1,8 @@
 package com.rodemtree.project.direction.service
 
 import com.rodemtree.project.api.dto.DocumentDto
+import com.rodemtree.project.api.service.KakaoCategorySearchService
+import com.rodemtree.project.direction.repository.DirectionRepository
 import com.rodemtree.project.pharmacy.dto.PharmacyDto
 import com.rodemtree.project.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
@@ -8,8 +10,16 @@ import spock.lang.Specification
 class DirectionServiceTest extends Specification {
 
     private PharmacySearchService pharmacySearchService = Mock()
+    private KakaoCategorySearchService kakaoCategorySearchService = Mock();
+    private DirectionRepository directionRepository = Mock();
+    private Base62Service base62Service = Mock();
 
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionService directionService = new DirectionService(
+            pharmacySearchService,
+            kakaoCategorySearchService,
+            directionRepository,
+            base62Service
+    )
 
     private List<PharmacyDto> pharmacyList
 
